@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 
 import ROUTES from './routes'
 import CompanyList from '../components/CompanyList';

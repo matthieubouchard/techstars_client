@@ -17,6 +17,7 @@ function AddCompany({ editing = false, company, closeAction }: AddCompanyProps) 
   const [formData, setFormData] = useState({})
   const [submit, setSubmit] = useState(false)
   const [date, setDate] = useState(new Date(Date.now()))
+  console.log('EDINGT?', editing)
 
   const createCompany = useApiRequest(
     {
@@ -44,21 +45,22 @@ function AddCompany({ editing = false, company, closeAction }: AddCompanyProps) 
         closeAction()
       }
     }
-  }, [submit])
+  }, [submit]) // eslint-disable-line
 
   useEffect(() => {
     if (editing && !!company) {
-      const { name, description, city, state, dateFounded } = company
+      const { name, description, city, state, dateFounded, logoUrl } = company
       setValue([
         { name },
         { description },
         { city },
         { state },
-        { dateFounded: new Date(company.dateFounded) }
+        { logoUrl },
+        { dateFounded: new Date(dateFounded) }
       ])
     }
 
-  }, [editing, company])
+  }, [editing, company, setValue])
 
 
   return (
@@ -69,7 +71,7 @@ function AddCompany({ editing = false, company, closeAction }: AddCompanyProps) 
             Comany Name
           </label>
           <input name="name" ref={register({ required: true })} className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" placeholder="Thievery Inc." />
-          {errors.name && "Company name is required"}
+          {errors.name && <div className="required-error text-red-500">Required</div>}
         </div>
 
         <div className="w-full px-3 my-5">
@@ -77,7 +79,15 @@ function AddCompany({ editing = false, company, closeAction }: AddCompanyProps) 
             What does your company do?
           </label>
           <textarea name="description" ref={register({ required: true })} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" placeholder="Description" />
-          {errors.description && "Description is required"}
+          {errors.description && <div className="required-error text-red-500">Required</div>}
+        </div>
+
+        <div className="w-full px-3 my-5">
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" >
+            Logo Image URL
+          </label>
+          <input type="text" name="logoUrl" ref={register({ required: true })} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-last-name" placeholder="http://fillmurray.com/200/300" />
+          {errors.logoUrl && <div className="required-error text-red-500">Required</div>}
         </div>
 
       </div>
@@ -87,7 +97,7 @@ function AddCompany({ editing = false, company, closeAction }: AddCompanyProps) 
             City
           </label>
           <input name="city" ref={register({ required: true })} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Ft. Lupton" />
-          {errors.city && "City required"}
+          {errors.city && <div className="required-error text-red-500">Required</div>}
 
         </div>
         <div className="w-full md:w-1/3 px-3 mb-6 ">
@@ -95,7 +105,7 @@ function AddCompany({ editing = false, company, closeAction }: AddCompanyProps) 
             State
           </label>
           <input name="state" ref={register({ required: true })} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Colorado" />
-          {errors.state && "required"}
+          {errors.state && <div className="required-error text-red-500">Required</div>}
 
         </div>
       </div>
@@ -114,9 +124,15 @@ function AddCompany({ editing = false, company, closeAction }: AddCompanyProps) 
         </div>
       </div>
 
-      <input className="mt-10 mr-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow cursor-pointer" type="submit" />
+      <input
+        id="submit-btn"
+        className="mt-10 mr-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow cursor-pointer" type="submit" />
       {editing &&
-        <button onClick={closeAction} className="mt-10 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow cursor-pointer"> Cancel </button>
+        <button
+          onClick={closeAction}
+          className="mt-10 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow cursor-pointer">
+          Cancel
+        </button>
       }
     </form>
   )

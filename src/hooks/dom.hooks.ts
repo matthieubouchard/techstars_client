@@ -9,6 +9,7 @@ export const useScrollToTop = () => {
       window.scrollTo(0, 0)
     })
     return () => {
+      /* istanbul ignore next */
       unlisten()
     }
   }, [history])

@@ -24,11 +24,13 @@ function CompanyList() {
 
   useEffect(() => {
     getCompanies()
-  }, [])
+  }, [getCompanies])
 
   return (
     <div>
-      <Link className="text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block mb-10 sm:w-3/12 w-2/12 flex-end" to={ROUTES.addCompany}>
+      <Link 
+        id="add-company"
+        className="text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block mb-10 sm:w-3/12 w-2/12 flex-end" to={ROUTES.addCompany}>
         Add Company
       </Link>
       <div id="company-list">

@@ -33,6 +33,7 @@ export const useApiRequest = ({
         url: `http://localhost:4000${endpoint}`,
         data,
       })
+      console.log('REQUEST', response.data)
       dispatch(successAction(response.data))
 
       if (successRedirect) {
@@ -40,8 +41,6 @@ export const useApiRequest = ({
       }
 
     } catch (e) {
-      console.log('ERRROR', e)
-
       dispatch(error(e))
     }
   }, [endpoint, method, successAction, dispatch, history, successRedirect, data])

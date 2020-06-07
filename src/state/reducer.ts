@@ -7,12 +7,15 @@ import {
   SET_FOUNDERS,
   SET_SUCCESS,
 } from './actionTypes'
+import { orderBy } from 'lodash'
 import { ApplicationState, ReducerAction } from '../types/types'
 
+/* istanbul ignore next */
 export const setStateToLocalStorage = (key: string, value: any) => {
   localStorage.setItem(key, JSON.stringify(value))
 }
 
+/* istanbul ignore next */
 export const getStateFromLocalStorage = (key: string, defaultValue: any | null) => {
   return localStorage.getItem(key) ? JSON.parse(localStorage.getItem(key)!) : defaultValue
 }
@@ -41,7 +44,7 @@ const reducer = (state: ApplicationState, action: ReducerAction) => {
     case SET_COMPANIES:
       return {
         ...state,
-        companies: action.payload,
+        companies: orderBy(action.payload, ['dateFounded'], ['desc']),
         status: SUCCESS,
       }
     case SET_FOUNDERS:
@@ -53,7 +56,7 @@ const reducer = (state: ApplicationState, action: ReducerAction) => {
     case SET_SUCCESS:
       return {
         ...state,
-        status: SUCCESS,
+        status: action.type,
       }
     case SET_SELECTED_DETAIL_ITEM:
       return {

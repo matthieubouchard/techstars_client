@@ -45,7 +45,8 @@
     "eject": "react-scripts eject",
     "cypress": "cypress open",
     "e2e": "start-test 3000 cypress",
-    "lint": "tsc --noEmit && eslint \"**/*.{ts,tsx}\" --quiet"
+    "lint": "tsc --noEmit && eslint \"**/*.{ts,tsx}\" --quiet",
+    "coverage": "npx nyc report --reporter=text-summary"
   },
   "eslintConfig": {
     "extends": "react-app"
