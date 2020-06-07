@@ -39,10 +39,12 @@
   "scripts": {
     "build:css": "postcss src/tailwind.css -c tailwind.config.js -o src/index.css",
     "watch:css": "postcss src/tailwind.css -c tailwind.config.js -o src/index.css",
-    "start": "npm run watch:css & react-scripts start",
+    "start": "npm run watch:css & react-scripts -r @cypress/instrument-cra start",
     "build": "npm run build:css react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "cypress": "cypress open",
+    "e2e": "start-test 3000 cypress",
     "lint": "tsc --noEmit && eslint \"**/*.{ts,tsx}\" --quiet"
   },
   "eslintConfig": {
@@ -61,6 +63,9 @@
     ]
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.8.1",
+    "@cypress/instrument-cra": "^1.1.1",
+    "cypress": "^4.7.0",
     "tailwindcss": "^1.4.6"
   }
 }

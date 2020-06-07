@@ -49,20 +49,23 @@ function CompanyDetail() {
 
   return (
     <>
+      
+      <CompanyCard company={company} />
       <button
+        id="edit-btn"
         onClick={shouldFormOpen(true)}
-        className="text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block mb-10 sm:w-3/12 w-2/12">
+        className="mt-20 text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block mb-10 sm:w-3/12 w-2/12">
         Edit
       </button>
       <button
+        id="cancel-btn"
         onClick={handleDelete}
         className="text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block mb-10 sm:w-3/12 w-2/12">
         Delete
       </button>
-      <CompanyCard company={company} />
       {edit && (
 
-        <div className="mt-5">
+        <div id="edit-form" className="mt-5">
           <AddCompany editing company={company} closeAction={shouldFormOpen(false)} />
         </div>
 
