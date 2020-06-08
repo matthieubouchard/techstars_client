@@ -1,31 +1,46 @@
 import React from 'react';
-import axios from 'axios'
 import styled from 'styled-components'
+import Loader from 'react-loader-spinner'
 
-import Header from './Header'
-import CompanyCard from './CompanyCard'
+import Header from './components/Header'
+import Router from './router/Router'
+import { useScrollToTop } from './hooks/dom.hooks'
+import { useAppContext } from './hooks/app.hooks'
+import { FETCHING } from './state/actionTypes';
 
-const apitest = async () => {
-  const res = await axios.get('http://localhost:4000/founders')
-  console.log('res!', res)
-}
 
-const Layout = styled.div.attrs({ className: "flex w-full justify-center py-10 bg-gray-100" })`
+const Layout = styled.div.attrs({ className: "container mt-12" })`
   padding-left: 5rem;
   padding-right: 5rem;
-  height: 100vh;
-  padding-top: 8rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+`
+
+const LoadingContainer = styled.div.attrs({className: 'fixed'})`
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -150px;
+  z-index: 1000;
 `
 
 function App() {
-  apitest()
+  useScrollToTop()
+  const { state: { status } } = useAppContext()
   return (
     <>
       <Header />
       <Layout>
-        <div className="w-8/12 h-">
-          <CompanyCard />
-        </div>
+        {status === FETCHING && (
+          <LoadingContainer>
+            <Loader
+              type="BallTriangle"
+              color="#00BFFF"
+              height={300}
+              width={300} />
+          </LoadingContainer>
+        )}
+        <Router />
       </Layout>
     </>
   );
