@@ -30,7 +30,7 @@ export const useApiRequest = ({
     try {
       const response = await axios({
         method,
-        url: `http://localhost:4000${endpoint}`,
+        url: `${process.env.REACT_APP_API_URL}${endpoint}`,
         data,
       })
       console.log('REQUEST', response.data)

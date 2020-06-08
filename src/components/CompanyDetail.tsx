@@ -52,7 +52,7 @@ function CompanyDetail() {
   }
 
   const deleteFounder = (id: string) => async () => {
-    await axios.delete(`http://localhost:4000/founders/${id}`)
+    await axios.delete(`${process.env.REACT_APP_API_URL}/founders/${id}`)
     getCompany()
   }
 
