@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 
 import { useApiRequest } from '../hooks/api.hooks'
 import { setSelectedDetailItem } from '../state/actions'
+import { TextInput, Label, buttonStyles, ValidationError } from './AddCompany'
 
 interface AddFounderProps {
   companyId: string
@@ -27,7 +28,6 @@ function AddFounder({ closeAction, companyId }: AddFounderProps) {
     setSubmit(true)
   };
 
-
   useEffect(() => {
     if (submit) {
       addFounder()
@@ -38,40 +38,38 @@ function AddFounder({ closeAction, companyId }: AddFounderProps) {
     }
   }, [submit]) // eslint-disable-line
 
-
   return (
-    <form className="w-full max-w-lg" onSubmit={handleSubmit(onSubmit)}>
+    <form className="w-10/12" onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-wrap -mx-3 mb-2">
         <div className="w-full md:w-1/3 px-3 mb-6 ">
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          <Label>
             FirstName
-          </label>
-          <input name="firstName" ref={register({ required: true })} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="John" />
-          {errors.firstName && <div className="required-error text-red-500">Required</div>}
-
+          </Label>
+          <TextInput name="firstName" ref={register({ required: true })} placeholder="John" />
+          {errors.firstName && <ValidationError>Required</ValidationError>}
         </div>
         <div className="w-full md:w-1/3 px-3 mb-6 ">
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          <Label>
             Last Name
-          </label>
-          <input name="lastName" ref={register({ required: true })} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Wick" />
-          {errors.lastName && <div className="required-error text-red-500">Required</div>}
+          </Label>
+          <TextInput name="lastName" ref={register({ required: true })} placeholder="Wick" />
+          {errors.lastName && <ValidationError>Required</ValidationError>}
         </div>
         <div className="w-full md:w-1/3 px-3 mb-6 ">
-          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+          <Label>
             Title
-          </label>
-          <input name="title" ref={register({ required: true })} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Chief People Inspector" />
-          {errors.title && <div className="required-error text-red-500">Required</div>}
+          </Label>
+          <TextInput name="title" ref={register({ required: true })} placeholder="Chief People Inspector" />
+          {errors.title && <ValidationError>Required</ValidationError>}
         </div>
       </div>
       <input
         id="submit-btn"
-        className="mt-10 mr-4 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow cursor-pointer" type="submit" />
+        className={buttonStyles} type="submit" />
 
       <button
         onClick={closeAction}
-        className="mt-10 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow cursor-pointer">
+        className={buttonStyles}>
         Cancel
       </button>
     </form>

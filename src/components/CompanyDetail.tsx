@@ -33,7 +33,7 @@ function CompanyDetail() {
   const getCompany = useApiRequest({ endpoint: `/companies/${params.id!}`, successAction: setSelectedDetailItem })
   const deleteCompany = useApiRequest({ method: "DELETE", endpoint: `/companies/${params.id!}`, successAction: setSuccess, successRedirect: ROUTES.companies })
   const btnClass = 'text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block'
-  
+
   useEffect(() => {
     const companyFromState = companies.find((c: Company) => (c.id.toString() === params.id))
     if (companyFromState) {
@@ -43,9 +43,8 @@ function CompanyDetail() {
     }
   }, []) //eslint-disable-line
 
-
   if (!company || !company.name) {
-    return <div> LOADING </div>
+    return null
   }
 
   const shouldFormOpen = (isOpen: boolean) => () => {
@@ -53,10 +52,7 @@ function CompanyDetail() {
   }
 
   const deleteFounder = (id: string) => async () => {
-    console.log('in delete', id)
-    const res = await axios.delete(`http://localhost:4000/founders/${id}`)
-    console.log('DELET REUSSLT', res)
-
+    await axios.delete(`http://localhost:4000/founders/${id}`)
     getCompany()
   }
 
@@ -70,7 +66,7 @@ function CompanyDetail() {
   return (
     <>
       <CardContainer>
-        <div data-selector="company-name" className="company-name text-gray-700 font-bold text-xl mb-2 bg-blue-300 text-right pr-5">{company.name}</div>
+        <div data-selector="company-name" className="company-name text-gray-700 font-bold text-2xl mb-2 bg-blue-300 text-right pr-5">{company.name}</div>
         <Logo src={company.logoUrl} alt="company-logo" />
         <p className="text-gray-700 text-right text-base pr-5">{company.city}, {company.state}</p>
         <div className="flex items-center justify-around  w-3/12 mx-auto">
@@ -86,7 +82,6 @@ function CompanyDetail() {
             className={btnClass}>
             Delete
           </button>
-
         </div>
         <div className="mb-8">
           <p className="text-gray-700 font-semibold text-base">Our mission:</p>
