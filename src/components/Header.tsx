@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import ROUTES from '../router/routes'
 
 const NavContainer = styled.nav.attrs({ className: 'flex items-center justify-between bg-blue-700 p-6 mb-5' })`
-  position: sticky;
+  position: absolute;
   top: 0;
   left: 0;
   max-height: 80px;

@@ -62,7 +62,9 @@ function CompanyDetail() {
   }
 
   const deleteFounder = (id: string) => async () => {
-    await axios.delete(`${process.env.REACT_APP_API_URL}/founders/${id}`)
+    const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000'
+
+    await axios.delete(`${apiBaseUrl}/founders/${id}`)
     getCompany()
   }
 
@@ -110,8 +112,8 @@ function CompanyDetail() {
           <div></div>
         </div>
         {company.founders && company.founders.length > 0 && (
-          <>
-            <h3 className="text-lg mt-5 mb-2">Founders</h3>
+          <div className="border rounded border-gray-600 mt-5 p-3">
+            <h3 className="text-lg mb-2">Founders</h3>
             <ul id="founder-list">
               {map(company.founders, (founder: Founder) => (
                 <li className="text-sm" id={founder.id}>
@@ -128,7 +130,7 @@ function CompanyDetail() {
                 </li>
               ))}
             </ul>
-          </>
+          </div>
         )}
         {!addFounder && (
           <div className="flex">
