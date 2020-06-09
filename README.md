@@ -12,7 +12,7 @@ Thanks so much for you consideration for this role. I wanted to share a few deta
 
 * database: aws RDS managed postgresql instance
 
-* hosting: the app is deployed to an EC2 instance and hosted behind and aws application loadbalancer at either http://interview.nicecmpny.com or http://techstars-1173038303.us-west-2.elb.amazonaws.com
+* hosting: the app is deployed to an EC2 instance using an aws application loadbalancer at either http://interview.nicecmpny.com or http://techstars-1173038303.us-west-2.elb.amazonaws.com
 
 
 A couple of notes:
