@@ -1,5 +1,3 @@
-import CompanyCard from "../../src/components/CompanyCard"
-
 beforeEach(() => {
   cy.visit('http://localhost:3000')
 })
@@ -9,7 +7,7 @@ it('CRUDs companies', () => {
   cy.get('#company-list')
     .should('have.length', 1)
     .children()
-    .should('have.length', 4)
+    .should('have.length.gt', 1)
 
   // can add a company
   cy.get('#add-company')
@@ -23,13 +21,15 @@ it('CRUDs companies', () => {
     .get("#submit-btn")
     .click()
     .get(".required-error")
-    .should('have.length', 3)
+    .should('have.length', 4)
     .get('input[name="city"]')
     .type('boulder')
     .get('input[name="state"]')
     .type('CO')
     .get('textarea[name="description"]')
-    .type('We are changing the way America brushes it\'s teeth ')
+    .type('We are changing the way America brushes it\'s teeth')
+    .get('input[name="logoUrl"]')
+    .type('http://www.fillmurray.com/200/300')
     .get("#submit-btn")
     .click()
     .wait(1500)
@@ -38,12 +38,12 @@ it('CRUDs companies', () => {
   cy.location('pathname').should('be', '/')
   cy.get('#company-list')
     .children()
-    .should('have.length', 5)  // new card!
-    
-    cy.get('.card')
+    .should('have.length', 4)  // new card!
+
+  cy.get('.card')
     .first() // cards ordered by dateFounded, first el last created
     .click()
-  
+
   cy.location('pathname').should('include', 'companies')
 
   // can edit
@@ -72,12 +72,31 @@ it('CRUDs companies', () => {
     .get('div[data-selector="company-name"]').then(nameDiv => {
       expect(nameDiv.get(0).innerText).to.eq('COMPANY RE-BRANDED')
     })
-  
+
+  // add and delete found using inline form
+  cy.get('#add-founder')
+    .click()
+    .get('input[name="firstName"]')
+    .type('NEW')
+    .get('input[name="lastName"]')
+    .type('FOUNDER')
+    .get('input[name="title"]')
+    .type('CEO')
+    .get('#submit-founder-btn')
+    .click()
+    .wait(1000)
+    .get('#founder-list')
+    .children()
+    .should('have.length', 1)
+    .get('.delete-founder')
+    .first()
+    .click()
+    .wait(1000)
+    .get('#founder-list')
+    .should('have.length', 0)
+
   cy.get('#delete-btn').click()
 
   // redirects after delete
   cy.location('pathname').should('be', '/')
-  cy.get('#company-list')
-    .children()
-    .should('have.length', 4) 
 })

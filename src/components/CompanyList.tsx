@@ -30,13 +30,15 @@ function CompanyList() {
 
   return (
     <div>
-      <Link
-        id="add-company"
-        className="text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block mb-10 sm:w-3/12 w-2/12 flex-end"
-        to={ROUTES.addCompany}
-      >
-        Add Company
-      </Link>
+      <div className="flex w-full justify-end">
+        <Link
+          id="add-company"
+          className="text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block mb-10"
+          to={ROUTES.addCompany}
+        >
+          Add Company
+        </Link>
+      </div>
       <div id="company-list">
         {map(companies, (c: Company) => (
           <div id={c.id.toString()} className="mb-3 cursor-pointer" onClick={viewCompanyDetails(c.id.toString())}>

@@ -47,10 +47,8 @@
     "watch:css": "postcss src/tailwind.css -c tailwind.config.js -o src/index.css",
     "start": "npm run watch:css & react-scripts -r @cypress/instrument-cra start",
     "build": "npm run build:css react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "cypress": "cypress open",
-    "e2e": "start-test 3000 cypress",
+    "e2e": "cypress run --headed",
     "lint": "tsc --noEmit && eslint \"**/*.{ts,tsx}\" --quiet",
     "coverage": "npx nyc report --reporter=text-summary"
   },

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { map } from 'lodash'
 import moment from 'moment'
@@ -8,10 +9,9 @@ import { Company, Founder } from '../types/types'
 import { useApiRequest } from '../hooks/api.hooks'
 import { setSelectedDetailItem, setSuccess } from '../state/actions'
 import { useAppContext } from '../hooks/app.hooks'
-import { useParams } from 'react-router-dom'
-import AddCompany from './AddCompany'
 import ROUTES from '../router/routes'
 import AddEditFounder from './AddFounder'
+import AddCompany, { buttonStyles } from './AddCompany'
 
 const CardContainer = styled.div.attrs({
   className:
@@ -75,6 +75,11 @@ function CompanyDetail() {
 
   return (
     <>
+      <div className="flex justify-start">
+        <Link className={`${buttonStyles} mb-4`} to={ROUTES.companies}>
+          Back
+        </Link>
+      </div>
       <CardContainer>
         <div
           data-selector="company-name"
@@ -107,14 +112,17 @@ function CompanyDetail() {
         {company.founders && company.founders.length > 0 && (
           <>
             <h3 className="text-lg mt-5 mb-2">Founders</h3>
-            <ul>
+            <ul id="founder-list">
               {map(company.founders, (founder: Founder) => (
                 <li className="text-sm" id={founder.id}>
                   <span className="font-semibold">
                     {founder.firstName} {founder.lastName}
                   </span>{' '}
                   | {founder.title}{' '}
-                  <span className="cursor-pointer text-red-700" onClick={deleteFounder(founder.id)}>
+                  <span
+                    className="delete-founder cursor-pointer text-red-700 text-sm"
+                    onClick={deleteFounder(founder.id)}
+                  >
                     x
                   </span>
                 </li>
