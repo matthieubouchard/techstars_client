@@ -3,11 +3,11 @@
 Thanks so much for you consideration for this role. I wanted to share a few details and give context for the architecture of this app.
 
 * client: TS/React/TailwindCSS using v16+ hooks patterns
-  * this was my first time using tailwind after hearing a lot of good thigns about it and its really nice for quickly creating reusable styled components, especially with utility & layout classes
+  * this was my first time using tailwind after hearing a lot of good things about it and its really nice for quickly creating reusable styled components, especially with utility & layout classes
   * testing with cypress which collects coverage! (new since the last time I used it)
 
 * server: TS/Node/Prisma
-  * this is the first time I've used Prisma and I really like it, though the v2 releaes doesn't support some of the earlier version's functionality yet which made for some surprises.
+  * this is the first time I've used Prisma and I really like it, though the v2 release doesn't support some of the earlier version's functionality yet, which made for some surprises.
   * testing with mocha/chai
 
 * database: aws RDS managed postgresql instance
@@ -17,8 +17,7 @@ Thanks so much for you consideration for this role. I wanted to share a few deta
 
 A couple of notes:
 * There's still some needed refactoring but I wanted to get the app in good place with test coverage and meet the mvp first.
-* Lots of lessons learned with this project taking on a couple new technologies in the app as well as deployment
-* I feel I have a fair command of react hooks patterns but am still learning in this realm
+* Lots of learnings with this project re: taking on a couple new technologies in the app as well as deployment
 * The testing pattern is brittle because of a limitation I ran into with Prisma not being able to easily switch their client to use a diffrent db based on env. It seems to be something they're actively working on but it's worth noting that the version I used isn't recommended for production yet.
 * always more to do given more time! (stretch goal was to deploy with docker) I'll look forward to talking with ya'll :)
 
