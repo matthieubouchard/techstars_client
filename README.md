@@ -20,7 +20,7 @@ A couple of notes:
 * Lots of lessons learned with this project taking on a couple new technologies in the app as well as deployment
 * I feel I have a fair command of react hooks patterns but am still learning in this realm
 * The testing pattern is brittle because of a limitation I ran into with Prisma not being able to easily switch their client to use a diffrent db based on env. It seems to be something they're actively working on but it's worth noting that the version I used isn't recommended for production yet.
-* always more to do given more time! I'll look forward to talking with ya'll :)
+* always more to do given more time! (stretch goal was to deploy with docker) I'll look forward to talking with ya'll :)
 
 
 ## Client specific scripts
