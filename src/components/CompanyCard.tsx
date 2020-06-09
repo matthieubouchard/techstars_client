@@ -15,7 +15,7 @@ const Logo = styled.img`
   height: 96px;
   position: absolute;
   bottom: 1rem;
-  right: 2rem;
+  right: 3rem;
 `
 
 interface CompanyCardProps {

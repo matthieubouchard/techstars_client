@@ -8,7 +8,7 @@ export interface Founder {
 }
 
 export interface Company {
-  id: number
+  id: string
   city: string
   state: string
   name: string

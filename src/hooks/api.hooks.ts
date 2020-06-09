@@ -26,11 +26,13 @@ export const useApiRequest = ({
   const history = useHistory()
 
   const makeRequest = useCallback(async () => {
+    const apiBaseUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000'
+
     dispatch(fetching())
     try {
       const response = await axios({
         method,
-        url: `${process.env.REACT_APP_API_URL}${endpoint}`,
+        url: `${apiBaseUrl}${endpoint}`,
         data,
         params,
       })
