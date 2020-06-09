@@ -1,5 +1,5 @@
-import { useEffect } from "react"
-import { useHistory } from "react-router-dom"
+import { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 
 // Corrects scroll pos when route changes don't reset scroll height to top
 export const useScrollToTop = () => {

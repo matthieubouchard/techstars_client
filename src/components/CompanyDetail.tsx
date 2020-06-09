@@ -5,16 +5,17 @@ import moment from 'moment'
 import axios from 'axios'
 
 import { Company, Founder } from '../types/types'
-import { useApiRequest } from '../hooks/api.hooks';
-import { setSelectedDetailItem, setSuccess } from '../state/actions';
-import { useAppContext } from '../hooks/app.hooks';
-import { useParams } from 'react-router-dom';
-import AddCompany from './AddCompany';
+import { useApiRequest } from '../hooks/api.hooks'
+import { setSelectedDetailItem, setSuccess } from '../state/actions'
+import { useAppContext } from '../hooks/app.hooks'
+import { useParams } from 'react-router-dom'
+import AddCompany from './AddCompany'
 import ROUTES from '../router/routes'
-import AddEditFounder from './AddFounder';
+import AddEditFounder from './AddFounder'
 
 const CardContainer = styled.div.attrs({
-  className: 'card relative shadow-md px-8 border border-teal-400 bg-white rounded-b rounded-r p-4 flex flex-col justify-between leading-normal transition duration-500 ease-in-out bg-gray-100 hover:bg-purple-100 transform hover:scale-103'
+  className:
+    'card relative shadow-md px-8 border border-teal-400 bg-white rounded-b rounded-r p-4 flex flex-col justify-between leading-normal transition duration-500 ease-in-out bg-gray-100 hover:bg-purple-100 transform hover:scale-103',
 })``
 const Logo = styled.img`
   border-radius: 5%;
@@ -26,16 +27,25 @@ const Logo = styled.img`
 `
 
 function CompanyDetail() {
-  const { state: { companies, selectedDetailItem: company }, dispatch } = useAppContext()
+  const {
+    state: { companies, selectedDetailItem: company },
+    dispatch,
+  } = useAppContext()
   const params: { id?: string } = useParams()
   const [edit, setEdit] = useState(false)
   const [addFounder, setAddFounder] = useState(false)
   const getCompany = useApiRequest({ endpoint: `/companies/${params.id!}`, successAction: setSelectedDetailItem })
-  const deleteCompany = useApiRequest({ method: "DELETE", endpoint: `/companies/${params.id!}`, successAction: setSuccess, successRedirect: ROUTES.companies })
-  const btnClass = 'text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block'
+  const deleteCompany = useApiRequest({
+    method: 'DELETE',
+    endpoint: `/companies/${params.id!}`,
+    successAction: setSuccess,
+    successRedirect: ROUTES.companies,
+  })
+  const btnClass =
+    'text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block'
 
   useEffect(() => {
-    const companyFromState = companies.find((c: Company) => (c.id.toString() === params.id))
+    const companyFromState = companies.find((c: Company) => c.id.toString() === params.id)
     if (companyFromState) {
       dispatch(setSelectedDetailItem(companyFromState))
     } else {
@@ -57,7 +67,7 @@ function CompanyDetail() {
   }
 
   const handleDelete = () => {
-    const confirm: boolean = window.confirm("are you sure you want to delete his company?")
+    const confirm: boolean = window.confirm('are you sure you want to delete his company?')
     if (confirm) {
       deleteCompany()
     }
@@ -66,20 +76,21 @@ function CompanyDetail() {
   return (
     <>
       <CardContainer>
-        <div data-selector="company-name" className="company-name text-gray-700 font-bold text-2xl mb-2 bg-blue-300 text-right pr-5">{company.name}</div>
+        <div
+          data-selector="company-name"
+          className="company-name text-gray-700 font-bold text-2xl mb-2 bg-blue-300 text-right pr-5"
+        >
+          {company.name}
+        </div>
         <Logo src={company.logoUrl} alt="company-logo" />
-        <p className="text-gray-700 text-right text-base pr-5">{company.city}, {company.state}</p>
+        <p className="text-gray-700 text-right text-base pr-5">
+          {company.city}, {company.state}
+        </p>
         <div className="flex items-center justify-around  w-3/12 mx-auto">
-          <button
-            id="edit-btn"
-            onClick={shouldFormOpen(true)}
-            className={btnClass}>
+          <button id="edit-btn" onClick={shouldFormOpen(true)} className={btnClass}>
             Edit
           </button>
-          <button
-            id="delete-btn"
-            onClick={handleDelete}
-            className={btnClass}>
+          <button id="delete-btn" onClick={handleDelete} className={btnClass}>
             Delete
           </button>
         </div>
@@ -91,31 +102,31 @@ function CompanyDetail() {
           <div className="text-sm">
             <p className="text-gray-600">Founded: {moment(company.dateFounded).format('MMMM DD, YYYY')}</p>
           </div>
-          <div>
-          </div>
+          <div></div>
         </div>
-        {(company.founders && company.founders.length > 0) && (
+        {company.founders && company.founders.length > 0 && (
           <>
-            <h3 className="text-lg mt-5 mb-2" >Founders</h3>
+            <h3 className="text-lg mt-5 mb-2">Founders</h3>
             <ul>
               {map(company.founders, (founder: Founder) => (
                 <li className="text-sm" id={founder.id}>
-                  <span className="font-semibold">{founder.firstName} {founder.lastName}</span> | {founder.title} <span className="cursor-pointer text-red-700" onClick={deleteFounder(founder.id)}>x</span>
+                  <span className="font-semibold">
+                    {founder.firstName} {founder.lastName}
+                  </span>{' '}
+                  | {founder.title}{' '}
+                  <span className="cursor-pointer text-red-700" onClick={deleteFounder(founder.id)}>
+                    x
+                  </span>
                 </li>
               ))}
             </ul>
           </>
-
         )}
         {!addFounder && (
           <div className="flex">
-            <button
-              id="add-founder"
-              onClick={() => setAddFounder(true)}
-              className={`${btnClass} w-2/12 mt-4`}>
+            <button id="add-founder" onClick={() => setAddFounder(true)} className={`${btnClass} w-2/12 mt-4`}>
               Add Founder
             </button>
-
           </div>
         )}
         {addFounder && (
@@ -132,7 +143,6 @@ function CompanyDetail() {
       )}
     </>
   )
-
 }
 
 export default CompanyDetail

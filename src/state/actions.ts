@@ -1,11 +1,5 @@
-import {
-  SET_COMPANIES,
-  FETCHING,
-  ERROR,
-  SET_SELECTED_DETAIL_ITEM,
-  SUCCESS,
-} from './actionTypes'
-import { Company, Founder } from '../types/types';
+import { SET_COMPANIES, FETCHING, ERROR, SET_SELECTED_DETAIL_ITEM, SUCCESS } from './actionTypes'
+import { Company, Founder } from '../types/types'
 
 export const setCompanies = (companies: Company[]) => {
   return {

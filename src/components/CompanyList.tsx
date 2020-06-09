@@ -3,9 +3,9 @@ import React, { useEffect } from 'react'
 import { map } from 'lodash'
 import { Company } from '../types/types'
 import CompanyCard from './CompanyCard'
-import { useApiRequest } from '../hooks/api.hooks';
-import { useAppContext } from '../hooks/app.hooks';
-import { setCompanies } from '../state/actions';
+import { useApiRequest } from '../hooks/api.hooks'
+import { useAppContext } from '../hooks/app.hooks'
+import { setCompanies } from '../state/actions'
 import { useHistory, Link } from 'react-router-dom'
 import ROUTES from '../router/routes'
 
@@ -14,7 +14,9 @@ interface CompanyListProps {
 }
 
 function CompanyList() {
-  const { state: { companies } } = useAppContext()
+  const {
+    state: { companies },
+  } = useAppContext()
   const history = useHistory()
   const getCompanies = useApiRequest({ endpoint: '/companies', successAction: setCompanies })
 
@@ -28,9 +30,11 @@ function CompanyList() {
 
   return (
     <div>
-      <Link 
+      <Link
         id="add-company"
-        className="text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block mb-10 sm:w-3/12 w-2/12 flex-end" to={ROUTES.addCompany}>
+        className="text-center bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow block mb-10 sm:w-3/12 w-2/12 flex-end"
+        to={ROUTES.addCompany}
+      >
         Add Company
       </Link>
       <div id="company-list">
@@ -42,7 +46,6 @@ function CompanyList() {
       </div>
     </div>
   )
-
 }
 
 export default CompanyList

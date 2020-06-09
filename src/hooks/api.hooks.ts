@@ -3,12 +3,12 @@ import { useHistory } from 'react-router-dom'
 import axios, { AxiosRequestConfig } from 'axios'
 
 import { fetching, error } from '../state/actions'
-import { useAppContext } from './app.hooks';
+import { useAppContext } from './app.hooks'
 
 interface UseApiRequest {
   endpoint: string
   successAction: Function
-  method?: AxiosRequestConfig["method"]
+  method?: AxiosRequestConfig['method']
   params?: object
   successRedirect?: string
   data?: object
@@ -17,7 +17,7 @@ interface UseApiRequest {
 export const useApiRequest = ({
   endpoint,
   successAction,
-  method = "GET",
+  method = 'GET',
   successRedirect,
   data,
   params,
@@ -32,18 +32,17 @@ export const useApiRequest = ({
         method,
         url: `${process.env.REACT_APP_API_URL}${endpoint}`,
         data,
+        params,
       })
-      console.log('REQUEST', response.data)
       dispatch(successAction(response.data))
 
       if (successRedirect) {
         history.push(successRedirect)
       }
-
     } catch (e) {
       dispatch(error(e))
     }
-  }, [endpoint, method, successAction, dispatch, history, successRedirect, data])
+  }, [endpoint, method, successAction, dispatch, history, successRedirect, data, params])
 
   return makeRequest
 }

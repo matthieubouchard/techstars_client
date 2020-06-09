@@ -1,4 +1,3 @@
-import { setSelectedDetailItem } from '../state/actions';
 export interface Founder {
   id: string
   firstName: string
@@ -6,7 +5,6 @@ export interface Founder {
   title: string
   companyId: number
   company?: Company
-  
 }
 
 export interface Company {
