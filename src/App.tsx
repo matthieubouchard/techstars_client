@@ -11,8 +11,8 @@ import { FETCHING } from './state/actionTypes'
 const Layout = styled.div.attrs({ className: 'container mt-12' })`
   padding-left: 5rem;
   padding-right: 5rem;
-  padding-top: 5rem;
   padding-bottom: 5rem;
+  padding-top: 5rem;
 `
 
 const LoadingContainer = styled.div.attrs({ className: 'fixed' })`

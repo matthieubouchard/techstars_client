@@ -1,12 +1,4 @@
-import {
-  FETCHING,
-  SUCCESS,
-  ERROR,
-  SET_SELECTED_DETAIL_ITEM,
-  SET_COMPANIES,
-  SET_FOUNDERS,
-  SET_SUCCESS,
-} from './actionTypes'
+import { FETCHING, SUCCESS, ERROR, SET_SELECTED_DETAIL_ITEM, SET_COMPANIES } from './actionTypes'
 import { orderBy } from 'lodash'
 import { ApplicationState, ReducerAction } from '../types/types'
 
@@ -47,13 +39,7 @@ const reducer = (state: ApplicationState, action: ReducerAction) => {
         companies: orderBy(action.payload, ['dateFounded'], ['desc']),
         status: SUCCESS,
       }
-    case SET_FOUNDERS:
-      return {
-        ...state,
-        companies: action.payload,
-        status: SUCCESS,
-      }
-    case SET_SUCCESS:
+    case SUCCESS:
       return {
         ...state,
         status: action.type,

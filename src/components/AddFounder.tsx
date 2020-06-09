@@ -56,7 +56,7 @@ function AddFounder({ closeAction, companyId }: AddFounderProps) {
           {errors.title && <ValidationError>Required</ValidationError>}
         </div>
       </div>
-      <input id="submit-btn" className={buttonStyles} type="submit" />
+      <input id="submit-founder-btn" className={buttonStyles} type="submit" />
 
       <button onClick={closeAction} className={buttonStyles}>
         Cancel
